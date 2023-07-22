@@ -3,3 +3,4 @@ sqlalchemy
 bcrypt
 pydantic
 uvicorn
+email_validator
