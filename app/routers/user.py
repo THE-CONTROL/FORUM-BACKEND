@@ -1,6 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from email_validator import validate_email, EmailNotValidError
 import bcrypt
 from fastapi_jwt_auth import AuthJWT
 from ..data import models, schemas
@@ -45,10 +44,7 @@ def register(reg_user: schemas.UserCreate, db: Session = Depends(DryFunc.get_db)
         raise HTTPException(status_code=400, detail="Username can only contain '@', alphabets and numbers!")
     if same_username:
         raise HTTPException(status_code=409, detail="Username already exists!")
-    try:
-        email = email
-    except EmailNotValidError:
-        raise HTTPException(status_code=400, detail="Please enter a valid email!")
+
     if same_email:
         raise HTTPException(status_code=409, detail="Email already exists!")
     if len(password) < 7:

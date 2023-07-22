@@ -1,6 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from email_validator import validate_email, EmailNotValidError
 import bcrypt
 from fastapi_jwt_auth import AuthJWT
 from ..data import models, schemas
@@ -28,11 +27,7 @@ def register(reg_admin: schemas.AdminCreate, db: Session = Depends(DryFunc.get_d
     if same_admin_name:
         raise HTTPException(status_code=409, detail={"msg": "Admin name already exists!",
                                                      "success": False})
-    try:
-        email = email
-    except EmailNotValidError:
-        raise HTTPException(status_code=400, detail={"msg": "Email not valid!",
-                                                     "success": False})
+
     if same_email:
         raise HTTPException(status_code=409, detail={"msg": "Email already exists!",
                                                      "success": False})
