@@ -29,7 +29,7 @@ def register(reg_admin: schemas.AdminCreate, db: Session = Depends(DryFunc.get_d
         raise HTTPException(status_code=409, detail={"msg": "Admin name already exists!",
                                                      "success": False})
     try:
-        email = validate_email(email).email
+        email = email
     except EmailNotValidError:
         raise HTTPException(status_code=400, detail={"msg": "Email not valid!",
                                                      "success": False})
@@ -139,7 +139,7 @@ def update(up_admin: schemas.AdminBase, authorize: AuthJWT = Depends(), db: Sess
         raise HTTPException(status_code=409, detail={"msg": "Admin name already exists!",
                                                      "success": False})
     try:
-        email = validate_email(email).email
+        email = email
     except EmailNotValidError:
         raise HTTPException(status_code=400, detail={"msg": "Email not valid!",
                                                      "success": False})

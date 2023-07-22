@@ -46,7 +46,7 @@ def register(reg_user: schemas.UserCreate, db: Session = Depends(DryFunc.get_db)
     if same_username:
         raise HTTPException(status_code=409, detail="Username already exists!")
     try:
-        email = validate_email(email).email
+        email = email
     except EmailNotValidError:
         raise HTTPException(status_code=400, detail="Please enter a valid email!")
     if same_email:
@@ -175,7 +175,7 @@ def update(up_user: schemas.UserBase, authorize: AuthJWT = Depends(), db: Sessio
     if same_username and same_username != cur_user:
         raise HTTPException(status_code=409, detail="Username already exists!")
     try:
-        email = validate_email(email).email
+        email = email
     except EmailNotValidError:
         raise HTTPException(status_code=400, detail="Please enter a valid email!")
     if same_email and same_email != cur_user:
