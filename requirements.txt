@@ -4,3 +4,4 @@ bcrypt
 pydantic
 uvicorn
 email_validator
+fastapi_jwt_auth
